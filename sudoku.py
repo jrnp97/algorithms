@@ -2,30 +2,42 @@
 Sud-oku Solver.
 """
 
-# HARD
-# sud_oku = [[8, 0, 0, 0, 0, 0, 0, 0, 0],
-#            [0, 0, 3, 6, 0, 0, 0, 0, 0],
-#            [0, 7, 0, 0, 9, 0, 2, 0, 0],
-#            [0, 5, 0, 0, 0, 7, 0, 0, 0],
-#            [0, 0, 0, 0, 4, 5, 7, 0, 0],
-#            [0, 0, 0, 1, 0, 0, 0, 3, 0],
-#            [0, 0, 1, 0, 0, 0, 0, 6, 8],
-#            [0, 0, 8, 5, 0, 0, 0, 1, 0],
-#            [0, 9, 0, 0, 0, 0, 4, 0, 0]
+# # HARD
+sud_oku = [[8, 0, 0, 0, 0, 0, 0, 0, 0],
+           [0, 0, 3, 6, 0, 0, 0, 0, 0],
+           [0, 7, 0, 0, 9, 0, 2, 0, 0],
+           [0, 5, 0, 0, 0, 7, 0, 0, 0],
+           [0, 0, 0, 0, 4, 5, 7, 0, 0],
+           [0, 0, 0, 1, 0, 0, 0, 3, 0],
+           [0, 0, 1, 0, 0, 0, 0, 6, 8],
+           [0, 0, 8, 5, 0, 0, 0, 1, 0],
+           [0, 9, 0, 0, 0, 0, 4, 0, 0]
+           ]
+
+# HARD 2
+# sud_oku = [[1, 0, 4, 9, 0, 0, 0, 6, 3],
+#            [0, 0, 2, 0, 0, 3, 0, 0, 0],
+#            [0, 0, 0, 0, 0, 0, 7, 9, 0],
+#            [0, 3, 0, 0, 0, 2, 0, 0, 0],
+#            [0, 5, 0, 3, 0, 8, 0, 1, 0],
+#            [0, 0, 0, 4, 0, 0, 0, 8, 0],
+#            [0, 9, 7, 0, 0, 0, 0, 0, 0],
+#            [0, 0, 0, 2, 0, 0, 6, 0, 0],
+#            [8, 2, 0, 0, 0, 9, 1, 0, 4]
 #            ]
 
 
 # EASY 1
-sud_oku = [[0, 9, 2, 0, 0, 4, 7, 0, 0],
-           [1, 5, 0, 0, 6, 0, 2, 0, 8],
-           [0, 0, 0, 0, 1, 2, 0, 4, 9],
-           [0, 0, 0, 0, 5, 8, 6, 0, 0],
-           [8, 4, 0, 0, 3, 0, 0, 5, 2],
-           [0, 0, 3, 2, 9, 0, 0, 0, 0],
-           [6, 1, 0, 8, 4, 0, 0, 0, 0],
-           [2, 0, 5, 0, 7, 0, 0, 6, 1],
-           [0, 0, 7, 6, 0, 0, 8, 9, 0],
-           ]
+# sud_oku = [[0, 9, 2, 0, 0, 4, 7, 0, 0],
+#            [1, 5, 0, 0, 6, 0, 2, 0, 8],
+#            [0, 0, 0, 0, 1, 2, 0, 4, 9],
+#            [0, 0, 0, 0, 5, 8, 6, 0, 0],
+#            [8, 4, 0, 0, 3, 0, 0, 5, 2],
+#            [0, 0, 3, 2, 9, 0, 0, 0, 0],
+#            [6, 1, 0, 8, 4, 0, 0, 0, 0],
+#            [2, 0, 5, 0, 7, 0, 0, 6, 1],
+#            [0, 0, 7, 6, 0, 0, 8, 9, 0],
+#            ]
 
 # EASY 2
 # sud_oku = [[0, 0, 0, 0, 9, 6, 4, 0, 1],
@@ -100,18 +112,18 @@ def is_valid(number, structure, box, place):
                     column_g_id = g_id
                     break
 
-            quadrant_column = column_groups[column_g_id].copy()
+            quadrant_column = [val for val in column_groups[column_g_id]]
 
             if element_index_vertical[0] == boxes_row_0_range[box_id][1]:
-                temp = [[value - 2, value - 1, value] for value in quadrant_column]
+                temo = [[value - 2, value - 1, value] for value in quadrant_column]
 
             elif element_index_vertical[0] == boxes_row_0_range[box_id][0]:
-                temp = [[value, value + 1, value + 2] for value in quadrant_column]
+                temo = [[value, value + 1, value + 2] for value in quadrant_column]
 
             else:
-                temp = [[value - 1, value, value + 1] for value in quadrant_column]
+                temo = [[value - 1, value, value + 1] for value in quadrant_column]
 
-            element_index_quadrant = [value for row in temp for value in row]
+            element_index_quadrant = [value for row in temo for value in row]
             quadrant = [structure[pos] for pos in element_index_quadrant]
 
             if number in quadrant:
@@ -131,7 +143,7 @@ def get_valid_numbers(sud_line, row_range, position):
 
 
 def reset_sud(sud_line):
-    temp = sud_line.copy()
+    temp = [val for val in sud_line]
     for idx, element in enumerate(temp):
         if type(element) == list:
             temp[idx] = 0
@@ -192,7 +204,7 @@ def any_change(sud_true, sud_result):
 
 
 def expert_solver(sud_line, size_to_get):
-    origin = sud_line.copy()
+    origin = [val for val in sud_line]
     minimum = 9999
     pos_min = -1
     for idx, element in enumerate(size_to_get):
@@ -211,7 +223,7 @@ def expert_solver(sud_line, size_to_get):
         return sud_line
     else:
         for element in origin[pos_min]:
-            tempo = origin.copy()
+            tempo = [val for val in origin]
             # print(f"Proof {element}")
             tempo[pos_min] = element
             to_resolver = reset_sud(tempo)
@@ -231,23 +243,22 @@ def expert_solver(sud_line, size_to_get):
                         sud_line = result
                         return sud_line
             else:
-                origin = solu
-        sud_line = origin
+                sud_line = solu
+                return sud_line
 
 
 def manager(sud_line):
-
     if is_sud_valid(sud_line):
         while True:
 
-            origin = sud_line.copy()
+            origin = [val for val in sud_line]
             length = basic_solver(sud_line)
             result = reset_sud(sud_line)
 
             if length is None:
                 return False, False
             elif any_change(origin, result):
-                sud_line = result.copy()
+                sud_line = [val for val in result]
             else:
                 return False, length
 
