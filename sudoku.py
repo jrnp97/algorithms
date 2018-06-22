@@ -1,18 +1,19 @@
 """
-Soluciónador de Sudoku's.
+Sud-oku Solver.
 """
 
 # HARD
-# sudoku = [[8, 0, 0, 0, 0, 0, 0, 0, 0],
-#           [0, 0, 3, 6, 0, 0, 0, 0, 0],
-#           [0, 7, 0, 0, 9, 0, 2, 0, 0],
-#           [0, 5, 0, 0, 0, 7, 0, 0, 0],
-#           [0, 0, 0, 0, 4, 5, 7, 0, 0],
-#           [0, 0, 0, 1, 0, 0, 0, 3, 0],
-#           [0, 0, 1, 0, 0, 0, 0, 6, 8],
-#           [0, 0, 8, 5, 0, 0, 0, 1, 0],
-#           [0, 9, 0, 0, 0, 0, 4, 0, 0]
-#           ]
+sud_oku = [[8, 0, 0, 0, 0, 0, 0, 0, 0],
+           [0, 0, 3, 6, 0, 0, 0, 0, 0],
+           [0, 7, 0, 0, 9, 0, 2, 0, 0],
+           [0, 5, 0, 0, 0, 7, 0, 0, 0],
+           [0, 0, 0, 0, 4, 5, 7, 0, 0],
+           [0, 0, 0, 1, 0, 0, 0, 3, 0],
+           [0, 0, 1, 0, 0, 0, 0, 6, 8],
+           [0, 0, 8, 5, 0, 0, 0, 1, 0],
+           [0, 9, 0, 0, 0, 0, 4, 0, 0]
+           ]
+
 
 # EASY 1
 # sud_oku = [[0, 9, 2, 0, 0, 4, 7, 0, 0],
@@ -27,16 +28,36 @@ Soluciónador de Sudoku's.
 #            ]
 
 # EASY 2
-sud_oku = [[0, 0, 0, 0, 9, 6, 4, 0, 1],
-            [1, 0, 9, 0, 0, 2, 7, 3, 0],
-            [0, 3, 4, 7, 0, 5, 2, 6, 0],
-            [3, 0, 6, 4, 0, 0, 0, 1, 2],
-            [7, 0, 1, 2, 6, 0, 3, 4, 0],
-            [0, 2, 0, 5, 3, 0, 0, 7, 0],
-            [2, 4, 0, 0, 5, 8, 0, 0, 3],
-            [9, 0, 0, 0, 0, 3, 8, 2, 4],
-            [0, 8, 3, 9, 2, 0, 0, 0, 7],
-            ]
+# sud_oku = [[0, 0, 0, 0, 9, 6, 4, 0, 1],
+#            [1, 0, 9, 0, 0, 2, 7, 3, 0],
+#            [0, 3, 4, 7, 0, 5, 2, 6, 0],
+#            [3, 0, 6, 4, 0, 0, 0, 1, 2],
+#            [7, 0, 1, 2, 6, 0, 3, 4, 0],
+#            [0, 2, 0, 5, 3, 0, 0, 7, 0],
+#            [2, 4, 0, 0, 5, 8, 0, 0, 3],
+#            [9, 0, 0, 0, 0, 3, 8, 2, 4],
+#            [0, 8, 3, 9, 2, 0, 0, 0, 7],
+#            ]
+
+def show_sud_oku(sud):
+    init = [0, 8]
+    i = [val for val in range(init[0], init[1] + 1)]
+    j = 0
+    cnt = 1
+    print("*" * 21)
+    while j < 9:
+        print(f"{sud[i[0]]} {sud[i[1]]} {sud[i[2]]} | "
+              f"{sud[i[3]]} {sud[i[4]]} {sud[i[5]]} | "
+              f"{sud[i[6]]} {sud[i[7]]} {sud[i[8]]}")
+        if cnt == 3:
+            print("-" * 21)
+            cnt = 0
+        j += 1
+        init[0] += 9
+        init[1] += 9
+        i = [val for val in range(init[0], init[1] + 1)]
+        cnt += 1
+    print("*" * 21)
 
 
 def is_valid(number, structure, box, place):
@@ -98,64 +119,22 @@ def is_valid(number, structure, box, place):
     return True
 
 
-def show_sud_oku(sud):
-    init = [0, 8]
-    i = [val for val in range(init[0], init[1] + 1)]
-    j = 0
-    cnt = 1
-    print("*" * 21)
-    while j < 9:
-        print(f"{sud[i[0]]} {sud[i[1]]} {sud[i[2]]} | "
-              f"{sud[i[3]]} {sud[i[4]]} {sud[i[5]]} | "
-              f"{sud[i[6]]} {sud[i[7]]} {sud[i[8]]}")
-        if cnt == 3:
-            print("-" * 21)
-            cnt = 0
-        j += 1
-        init[0] += 9
-        init[1] += 9
-        i = [val for val in range(init[0], init[1] + 1)]
-        cnt += 1
-    print("*" * 21)
-
-
 def get_valid_numbers(sud_line, row_range, position):
     numbers = list(range(1, 10))
     valid = []
     for num in numbers:
-        if is_valid(number=num, structure=sud_line, box=row_range, place=position):  # Se verifica la validez
+        if is_valid(number=num, structure=sud_line, box=row_range, place=position):
             valid.append(num)
 
     return valid
 
 
-def basic_solver(sud_line):
-    position = 0
-    modifications = 0
-    row_range = [0, 8]
-    possibilities_size = []
-    while position < 81:
-        if sud_line[position] == 0:
-            validates = get_valid_numbers(sud_line=sud_line, row_range=row_range, position=position)
-            possibilities_size.append(len(validates))
-            sud_line[position] = validates if len(validates) > 1 else validates[0]
-        else:
-            possibilities_size.append(1)
-
-        position += 1
-        modifications += 1
-        if modifications == 9:  # Si el contador llega a 9 cambios realizados se cambia la linea horizontal a manejar
-            row_range[0] += 9
-            row_range[1] += 9
-            modifications = 0
-
-    return possibilities_size
-
-
 def reset_sud(sud_line):
-    for idx, element in enumerate(sud_line):
+    temp = sud_line.copy()
+    for idx, element in enumerate(temp):
         if type(element) == list:
-            sud_line[idx] = 0
+            temp[idx] = 0
+    return temp
 
 
 def is_sud_valid(sud_line):
@@ -175,17 +154,63 @@ def is_sud_valid(sud_line):
         return True
 
 
+def basic_solver(sud_line):
+    position = 0
+    modifications = 0
+    row_range = [0, 8]
+    possibilities_size = []
+    while position < 81:
+        if sud_line[position] == 0:
+            validates = get_valid_numbers(sud_line=sud_line, row_range=row_range, position=position)
+            possibilities_size.append(len(validates))
+            sud_line[position] = validates if len(validates) > 1 else validates[0]
+        else:
+            possibilities_size.append(1)
+
+        position += 1
+        modifications += 1
+        if modifications == 9:
+            row_range[0] += 9
+            row_range[1] += 9
+            modifications = 0
+
+    return possibilities_size
+
+
+def any_change(sud_true, sud_result):
+    status = []
+    for true, res in zip(sud_true, sud_result):
+        if true - res == 0:
+            status.append(True)
+        else:
+            status.append(False)
+
+    return not all(status)
+
+
+def expert_solver(sud_line):
+    pass
+
+
 if __name__ == "__main__":
-    s_deserializer = [value for row in sud_oku for value in row]  # Deserializando sudoku en vector
-    print("Sudoku to solver")
+    s_deserializer = [value for row in sud_oku for value in row]
+    print("Sud-oku to solver")
     show_sud_oku(s_deserializer)
     print("Solution : ")
     if is_sud_valid(s_deserializer):
         while True:
+            origin = s_deserializer.copy()
             lenght = basic_solver(s_deserializer)
-            reset_sud(s_deserializer)
+            result = reset_sud(s_deserializer)
+
+            if any_change(origin, result):
+                s_deserializer = result.copy()
+            else:
+                print("ERROR!!, basic mode is broken to iput sud-oku")
+                break
+
             if sum(lenght) == 81:
                 break
         show_sud_oku(s_deserializer)
     else:
-        print("The elements on sudoku is incorrect")
+        print("The elements on sud-oku is incorrect")
