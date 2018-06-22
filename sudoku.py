@@ -162,6 +162,8 @@ def basic_solver(sud_line):
     while position < 81:
         if sud_line[position] == 0:
             validates = get_valid_numbers(sud_line=sud_line, row_range=row_range, position=position)
+            if len(validates) == 0:  # Don't possible number
+                return None
             possibilities_size.append(len(validates))
             sud_line[position] = validates if len(validates) > 1 else validates[0]
         else:
@@ -188,8 +190,71 @@ def any_change(sud_true, sud_result):
     return not all(status)
 
 
-def expert_solver(sud_line):
-    pass
+def expert_solver(sud_line, size_to_get):
+    origin = sud_line.copy()
+    minimum = 9999
+    pos_min = -1
+    for idx, element in enumerate(size_to_get):
+        if element < minimum and element != 1:
+            minimum = element
+            pos_min = idx
+
+    # print("-" * 30)
+    # print("Expert mode")
+    # print("-"*30)
+    # print(f"Minimum probable elements number is {minimum}
+    # the list selected is {origin[pos_min]} on position {pos_min}")
+    # print("-" * 20)
+
+    if sum(size_to_get) == 81:
+        return sud_line
+    else:
+        for element in origin[pos_min]:
+            tempo = origin.copy()
+            # print(f"Proof {element}")
+            tempo[pos_min] = element
+            to_resolver = reset_sud(tempo)
+            solu, size = manager(to_resolver)
+
+            if not solu and not size:
+                pass
+                # print("Error, occupied waiting")
+            elif solu is None:
+                pass
+                # print("The elements on sud-oku is incorrect")
+            elif not solu:
+                # print("Insufficient basic mode X(")
+                result = expert_solver(to_resolver, size)
+                if result is not None:
+                    if is_sud_valid(result):
+                        sud_line = result
+                        return sud_line
+            else:
+                origin = solu
+        sud_line = origin
+
+
+def manager(sud_line):
+
+    if is_sud_valid(sud_line):
+        while True:
+
+            origin = sud_line.copy()
+            length = basic_solver(sud_line)
+            result = reset_sud(sud_line)
+
+            if length is None:
+                return False, False
+            elif any_change(origin, result):
+                sud_line = result.copy()
+            else:
+                return False, length
+
+            if sum(length) == 81:
+                break
+        return result, None
+    else:
+        return None, None
 
 
 if __name__ == "__main__":
@@ -197,20 +262,14 @@ if __name__ == "__main__":
     print("Sud-oku to solver")
     show_sud_oku(s_deserializer)
     print("Solution : ")
-    if is_sud_valid(s_deserializer):
-        while True:
-            origin = s_deserializer.copy()
-            lenght = basic_solver(s_deserializer)
-            result = reset_sud(s_deserializer)
-
-            if any_change(origin, result):
-                s_deserializer = result.copy()
-            else:
-                print("ERROR!!, basic mode is broken to iput sud-oku")
-                break
-
-            if sum(lenght) == 81:
-                break
-        show_sud_oku(s_deserializer)
-    else:
+    print("Mode Basic :D")
+    solution, temp = manager(s_deserializer)
+    if solution is None:
         print("The elements on sud-oku is incorrect")
+    elif not solution:
+        print("Insufficient basic mode X(, Change to expert mode |GO!|--->")
+        solution = expert_solver(s_deserializer, temp)
+        print("Done")
+    else:
+        show_sud_oku(solution)
+    show_sud_oku(solution)
