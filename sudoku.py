@@ -1,17 +1,6 @@
 """
 Soluciónador de Sudoku's.
 """
-from random import randint
-
-a = [[8, 0, 0], [0, 0, 0], [0, 0, 0],
-     [0, 0, 3], [6, 0, 0], [0, 0, 0],
-     [0, 7, 0], [0, 9, 0], [2, 0, 0],
-     [0, 5, 0], [0, 0, 7], [0, 0, 0],
-     [0, 0, 0], [1, 0, 0], [0, 3, 0],
-     [0, 0, 1], [0, 0, 0], [0, 6, 8],
-     [0, 0, 8], [5, 0, 0], [0, 1, 0],
-     [0, 9, 0], [0, 0, 0], [4, 0, 0]
-     ]
 
 # HARD
 # sudoku = [[8, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -25,104 +14,100 @@ a = [[8, 0, 0], [0, 0, 0], [0, 0, 0],
 #           [0, 9, 0, 0, 0, 0, 4, 0, 0]
 #           ]
 
-# EASY
-sudoku = [[0, 9, 2, 0, 0, 4, 7, 0, 0],
-          [1, 5, 0, 0, 6, 0, 2, 0, 8],
-          [0, 0, 0, 0, 1, 2, 0, 4, 9],
-          [0, 0, 0, 0, 5, 8, 6, 0, 0],
-          [8, 4, 0, 0, 3, 0, 0, 5, 2],
-          [0, 0, 3, 2, 9, 0, 0, 0, 0],
-          [6, 1, 0, 8, 4, 0, 0, 0, 0],
-          [2, 0, 5, 0, 7, 0, 0, 6, 1],
-          [0, 0, 7, 6, 0, 0, 8, 9, 0],
-          ]
+# EASY 1
+# sud_oku = [[0, 9, 2, 0, 0, 4, 7, 0, 0],
+#            [1, 5, 0, 0, 6, 0, 2, 0, 8],
+#            [0, 0, 0, 0, 1, 2, 0, 4, 9],
+#            [0, 0, 0, 0, 5, 8, 6, 0, 0],
+#            [8, 4, 0, 0, 3, 0, 0, 5, 2],
+#            [0, 0, 3, 2, 9, 0, 0, 0, 0],
+#            [6, 1, 0, 8, 4, 0, 0, 0, 0],
+#            [2, 0, 5, 0, 7, 0, 0, 6, 1],
+#            [0, 0, 7, 6, 0, 0, 8, 9, 0],
+#            ]
+
+# EASY 2
+sud_oku = [[0, 0, 0, 0, 9, 6, 4, 0, 1],
+            [1, 0, 9, 0, 0, 2, 7, 3, 0],
+            [0, 3, 4, 7, 0, 5, 2, 6, 0],
+            [3, 0, 6, 4, 0, 0, 0, 1, 2],
+            [7, 0, 1, 2, 6, 0, 3, 4, 0],
+            [0, 2, 0, 5, 3, 0, 0, 7, 0],
+            [2, 4, 0, 0, 5, 8, 0, 0, 3],
+            [9, 0, 0, 0, 0, 3, 8, 2, 4],
+            [0, 8, 3, 9, 2, 0, 0, 0, 7],
+            ]
 
 
 def is_valid(number, structure, box, place):
-    # print(f"Numero a examinar {number}, en el rango {box}, será puesto en {place}")
-    cube_line = [structure[j] for j in range(box[0], box[1] + 1)]  # Linea horizontal del numero
-    # print("-"*10, "Linea horizontal")
-    # print(cube_line)
+    element_line_horizontal = [structure[j] for j in range(box[0], box[1] + 1)]
 
-    if number in cube_line:
-        return False  # Si ya existe horizontalmente se responde negativamente
+    if number in element_line_horizontal:
+        return False
     else:
 
-        initial = place % 9  # Consiguiendo punto en fila 0 verticalmente
-        # Inicializando ruta de indices de vector vertical
-        steps = [0 for _ in range(9)]
-        steps[0] = initial
-        i = 1
-        while i < 9:
-            steps[i] += steps[i - 1] + 9
-            i += 1
+        row_0_position = place % 9
+        element_index_vertical = [0 for _ in range(9)]
+        element_index_vertical[0] = row_0_position
+        element_id = 1
+        while element_id < 9:
+            element_index_vertical[element_id] += element_index_vertical[element_id - 1] + 9
+            element_id += 1
 
-        other_places = [structure[pos] for pos in steps]  # Creando arreglo de item verticalmente
+        element_line_vertical = [structure[pos] for pos in element_index_vertical]
 
-        # print("-" * 10, "Linea Vertical")
-        # print(other_places)
-        # print(f"Indices - {steps}")
-
-        if number in other_places:
-            return False  # Si ya existe verticalmente se responde negativamente
+        if number in element_line_vertical:
+            return False
         else:
-            quadrant = [(0, 2),
-                        (3, 5),
-                        (6, 8)]  # Estableciendo limites de los "box" en el sudoku
-            quad_id = -1
-            # Hallando en que box se encuentra el numero
-            for id, boxed in enumerate(quadrant):
-                if (steps[0] >= boxed[0]) and (steps[0] <= boxed[1]):
-                    quad_id = id
+            boxes_row_0_range = [(0, 2),
+                                 (3, 5),
+                                 (6, 8)]
+            box_id = -1
+            for b_id, box in enumerate(boxes_row_0_range):
+                if (element_index_vertical[0] >= box[0]) and (element_index_vertical[0] <= box[1]):
+                    box_id = b_id
                     break
 
-            # Grupos de posibles columnas en el box
-            c_groups = [steps[0:3:1],
-                        steps[3:6:1],
-                        steps[6:9:1]
-                        ]
-            num_pos = -1
-            for idx, group in enumerate(c_groups):
+            column_groups = [element_index_vertical[0:3:1],
+                             element_index_vertical[3:6:1],
+                             element_index_vertical[6:9:1]
+                             ]
+            column_g_id = -1
+            for g_id, group in enumerate(column_groups):
                 if place in group:
-                    num_pos = idx
+                    column_g_id = g_id
                     break
-            quadrant_column = c_groups[num_pos].copy()  # Se extraen los indices de los elem.. en el box
 
-            # Calculando indices en el "box"
-            if steps[0] == quadrant[quad_id][1]:  # Esta en la pared derecha
+            quadrant_column = column_groups[column_g_id].copy()
+
+            if element_index_vertical[0] == boxes_row_0_range[box_id][1]:
                 temp = [[value - 2, value - 1, value] for value in quadrant_column]
 
-            elif steps[0] == quadrant[quad_id][0]:  # Esta en la pared izquierda
+            elif element_index_vertical[0] == boxes_row_0_range[box_id][0]:
                 temp = [[value, value + 1, value + 2] for value in quadrant_column]
 
-            else:  # Esta en el centro
+            else:
                 temp = [[value - 1, value, value + 1] for value in quadrant_column]
 
-            # Deserializando en vector la matriz de indices generada
-            indexes = [value for row in temp for value in row]
-            # Extrayendo valores en el box
-            quadranted = [structure[pos] for pos in indexes]
+            element_index_quadrant = [value for row in temp for value in row]
+            quadrant = [structure[pos] for pos in element_index_quadrant]
 
-            # print("-" * 10, f"Box #{quad_id}")
-            # print(quadranted)
-            # print(f"Indices - {indexes}")
+            if number in quadrant:
+                return False
 
-            if number in quadranted:
-                return False  # Si el numero se encuentra en el "box" se responde negativamente
-
-    return True  # Si nada de lo anterior se impide se retorna positivamente
+    return True
 
 
-def show_sudoku(sudo):
+def show_sud_oku(sud):
     init = [0, 8]
     i = [val for val in range(init[0], init[1] + 1)]
     j = 0
     cnt = 1
     print("*" * 21)
     while j < 9:
-        print(f"{sudo[i[0]]} {sudo[i[1]]} {sudo[i[2]]} | "
-              f"{sudo[i[3]]} {sudo[i[4]]} {sudo[i[5]]} | "
-              f"{sudo[i[6]]} {sudo[i[7]]} {sudo[i[8]]}")
+        print(f"{sud[i[0]]} {sud[i[1]]} {sud[i[2]]} | "
+              f"{sud[i[3]]} {sud[i[4]]} {sud[i[5]]} | "
+              f"{sud[i[6]]} {sud[i[7]]} {sud[i[8]]}")
         if cnt == 3:
             print("-" * 21)
             cnt = 0
@@ -134,41 +119,73 @@ def show_sudoku(sudo):
     print("*" * 21)
 
 
-if __name__ == "__main__":
+def get_valid_numbers(sud_line, row_range, position):
+    numbers = list(range(1, 10))
+    valid = []
+    for num in numbers:
+        if is_valid(number=num, structure=sud_line, box=row_range, place=position):  # Se verifica la validez
+            valid.append(num)
 
-    s_deserializer = [value for row in sudoku for value in row]  # Deserializando sudoku en vector
+    return valid
 
-    idx = 0  # Comenzando en el indice 1
-    cont = 0  # Contador de cambios realizados
-    cube = [0, 8]  # Primer linea horizontal a generar
-    free = {}
-    lenght = []
-    while idx < 81:  # ciclo que se ejecutará hasta completar los 84 numeros del sudoku
 
-        print("=" * 30)
-        print(f"Analizando posición {idx}")
-        print("-" * 20)
-        if s_deserializer[idx] == 0:  # si el valor a interactuar se encuentra vacio
-            # Analizando numero de posibles valores
-            numbers = list(range(1, 10))  # Se genera los numeros entre 1 y 9
-            valid = []
-            for num in numbers:
-                if is_valid(number=num, structure=s_deserializer, box=cube, place=idx):  # Se verifica la validez
-                    valid.append(num)
-            lenght.append(len(valid))
-            print(f"Los numeros validos son {valid}")
-            s_deserializer[idx] = valid if len(valid) > 1 else valid[0]  # Asignando numero valido al indice
+def basic_solver(sud_line):
+    position = 0
+    modifications = 0
+    row_range = [0, 8]
+    possibilities_size = []
+    while position < 81:
+        if sud_line[position] == 0:
+            validates = get_valid_numbers(sud_line=sud_line, row_range=row_range, position=position)
+            possibilities_size.append(len(validates))
+            sud_line[position] = validates if len(validates) > 1 else validates[0]
         else:
-            print("Ninguna Accion realizada")
-        idx += 1  # Se cuenta el numero completado
-        cont += 1  # se cuenta el "cambio"
+            possibilities_size.append(1)
 
-        # show_sudoku(s_deserializer)  # Se muestra el proceso de asignanción
-        # print(f"Valor contador {cont}")
-        if cont == 9:  # Si el contador llega a 9 cambios realizados se cambia la linea horizontal a manejar
-            cube[0] += 9
-            cube[1] += 9
-            cont = 0
+        position += 1
+        modifications += 1
+        if modifications == 9:  # Si el contador llega a 9 cambios realizados se cambia la linea horizontal a manejar
+            row_range[0] += 9
+            row_range[1] += 9
+            modifications = 0
 
-    show_sudoku(s_deserializer)  # Se muestra arreglo resultante.
-    print(f"Minima posibilidad detectada {min(lenght)}")
+    return possibilities_size
+
+
+def reset_sud(sud_line):
+    for idx, element in enumerate(sud_line):
+        if type(element) == list:
+            sud_line[idx] = 0
+
+
+def is_sud_valid(sud_line):
+    status = []
+
+    for element in sud_line:
+        if element == 0 or type(element) == list:
+            status.append(False)
+        elif element < 0:
+            status.append(None)
+        else:
+            status.append(True)
+
+    if (not all(status) and status.count(True) < 17) or status.count(None) >= 1:
+        return False
+    elif status.count(True) >= 17:
+        return True
+
+
+if __name__ == "__main__":
+    s_deserializer = [value for row in sud_oku for value in row]  # Deserializando sudoku en vector
+    print("Sudoku to solver")
+    show_sud_oku(s_deserializer)
+    print("Solution : ")
+    if is_sud_valid(s_deserializer):
+        while True:
+            lenght = basic_solver(s_deserializer)
+            reset_sud(s_deserializer)
+            if sum(lenght) == 81:
+                break
+        show_sud_oku(s_deserializer)
+    else:
+        print("The elements on sudoku is incorrect")
