@@ -2,7 +2,9 @@
 Sud-oku Solver.
 """
 
-# # HARD
+import time
+
+# HARD
 sud_oku = [[8, 0, 0, 0, 0, 0, 0, 0, 0],
            [0, 0, 3, 6, 0, 0, 0, 0, 0],
            [0, 7, 0, 0, 9, 0, 2, 0, 0],
@@ -243,7 +245,7 @@ def expert_solver(sud_line, size_to_get):
                         sud_line = result
                         return sud_line
             else:
-                sud_line = solu
+                sud_line = solu  # To keep safety
                 return sud_line
 
 
