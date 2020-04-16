@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %} Dashboard - DGun17 {% endblock %}
+{% block style %}
+<style type="text/css">
+
+    #request_url{
+        background: #e9ecef;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    #request_body .info{
+        width: 100% !important;
+        height: 350px;
+        resize: none;
+    }
+
+    #request_history .info{
+        background: #e9ecef;
+        width: 100% !important;
+        height: 350px;
+        resize: none;
+    }
+
+</style>
+{% endblock %}
+
+{% block header %}
+<nav class="navbar navbar-dark bg-dark">
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Home</a>
+      </li>
+    </ul>
+</nav>
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row" style="margin-top: 10px">
+        <div class="col-sm-6 col-lg-6" id="proxy_change">
+            Proxy status: {{ status }}
+        </div>
+        <div class="col-sm-6 col-lg-6 align-content-end" id="proxy_btn">
+            <button style="float: right">Encender</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 text-center" id="request_url">
+            {{ request_url }}
+            <button style="float:right;">Enviar</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6" id="request_body">
+            <textarea class="info">{{ request_body }}</textarea>
+        </div>
+        <div class="col-sm-12 col-md-6" id="request_history">
+            <div class="info">
+                {{ request_history }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

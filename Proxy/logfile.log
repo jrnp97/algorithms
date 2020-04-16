@@ -1,0 +1,88 @@
+
+INFO:root:[*] Server started successfully...
+INFO:root:Process CONNECT HTTP Verb on www.google.com
+INFO:root:Send request CONNECT to www.google.com:443
+INFO:root:Get correctly response of www.google.com
+INFO:root:[*] Server started successfully...
+INFO:root:Process CONNECT HTTP Verb on www.google.com
+INFO:root:Process CONNECT HTTP Verb on www.google.com
+INFO:root:Process CONNECT HTTP Verb on incoming.telemetry.mozilla.org
+INFO:root:Process CONNECT HTTP Verb on incoming.telemetry.mozilla.org
+INFO:root:[*] Server started successfully...
+INFO:root:Process CONNECT HTTP Verb on www.google.com
+INFO:root:CONNECT HTTP Successfully on www.google.com
+INFO:root:Send request GET to www.google.com:443
+INFO:root:Get correctly response of www.google.com
+INFO:root:Process CONNECT HTTP Verb on support.mozilla.org
+INFO:root:CONNECT HTTP Successfully on support.mozilla.org
+INFO:root:Send request CONNECT to support.mozilla.org:443
+INFO:root:Get correctly response of support.mozilla.org
+INFO:root:[*] Server started successfully...
+INFO:root:Process CONNECT HTTP Verb on www.google.com
+INFO:root:CONNECT HTTP Successfully on www.google.com
+INFO:root:Send request GET to www.google.com:443
+INFO:root:Get correctly response of www.google.com
+INFO:root:Process CONNECT HTTP Verb on www.google.com
+INFO:root:CONNECT HTTP Successfully on www.google.com
+INFO:root:Send request GET to www.google.com:443
+INFO:root:Get correctly response of www.google.com
+INFO:root:Process CONNECT HTTP Verb on www.google.com
+INFO:root:CONNECT HTTP Successfully on www.google.com
+INFO:root:Send request GET to www.google.com:443
+INFO:root:Get correctly response of www.google.com
+INFO:root:Process CONNECT HTTP Verb on www.google.com
+INFO:root:CONNECT HTTP Successfully on www.google.com
+INFO:root:Send request GET to www.google.com:443
+INFO:root:Get correctly response of www.google.com
+INFO:root:Process CONNECT HTTP Verb on www.google.com
+INFO:root:CONNECT HTTP Successfully on www.google.com
+INFO:root:Send request GET to www.google.com:443
+INFO:root:Get correctly response of www.google.com
+INFO:root:[+] Server down successfully...
+INFO:root:[*] Server started successfully...
+INFO:root:Process CONNECT HTTP Verb on 0.client-channel.google.com
+INFO:root:CONNECT HTTP Successfully on 0.client-channel.google.com
+INFO:root:Send request CONNECT to 0.client-channel.google.com:443
+INFO:root:Get correctly response of 0.client-channel.google.com
+INFO:root:Process CONNECT HTTP Verb on www.google.com
+INFO:root:CONNECT HTTP Successfully on www.google.com
+INFO:root:Send request GET to www.google.com:443
+INFO:root:Get correctly response of www.google.com
+INFO:root:Process CONNECT HTTP Verb on 0.client-channel.google.com
+INFO:root:CONNECT HTTP Successfully on 0.client-channel.google.com
+INFO:root:Send request CONNECT to 0.client-channel.google.com:443
+INFO:root:Get correctly response of 0.client-channel.google.com
+INFO:root:Process CONNECT HTTP Verb on 0.client-channel.google.com
+INFO:root:CONNECT HTTP Successfully on 0.client-channel.google.com
+INFO:root:Send request CONNECT to 0.client-channel.google.com:443
+INFO:root:Get correctly response of 0.client-channel.google.com
+INFO:root:Process CONNECT HTTP Verb on 0.client-channel.google.com
+INFO:root:CONNECT HTTP Successfully on 0.client-channel.google.com
+INFO:root:Send request CONNECT to 0.client-channel.google.com:443
+INFO:root:Get correctly response of 0.client-channel.google.com
+INFO:root:Process CONNECT HTTP Verb on www.google.com
+INFO:root:CONNECT HTTP Successfully on www.google.com
+INFO:root:Send request GET to www.google.com:443
+INFO:root:Get correctly response of www.google.com
+INFO:root:Process CONNECT HTTP Verb on www.google.com
+INFO:root:CONNECT HTTP Successfully on www.google.com
+INFO:root:Send request GET to www.google.com:443
+INFO:root:Get correctly response of www.google.com
+INFO:root:Send request GET to cybercrime-tracker.net:80
+INFO:root:Get correctly response of cybercrime-tracker.net
+INFO:root:Process CONNECT HTTP Verb on www.bing.com
+INFO:root:CONNECT HTTP Successfully on www.bing.com
+INFO:root:Send request GET to www.bing.com:80
+INFO:root:Get correctly response of www.bing.com
+INFO:root:Process CONNECT HTTP Verb on incoming.telemetry.mozilla.org
+INFO:root:CONNECT HTTP Successfully on incoming.telemetry.mozilla.org
+INFO:root:Send request CONNECT to incoming.telemetry.mozilla.org:443
+INFO:root:Get correctly response of incoming.telemetry.mozilla.org
+INFO:root:Process CONNECT HTTP Verb on incoming.telemetry.mozilla.org
+INFO:root:CONNECT HTTP Successfully on incoming.telemetry.mozilla.org
+INFO:root:Send request CONNECT to incoming.telemetry.mozilla.org:443
+INFO:root:Get correctly response of incoming.telemetry.mozilla.org
+INFO:root:Process CONNECT HTTP Verb on incoming.telemetry.mozilla.org
+INFO:root:CONNECT HTTP Successfully on incoming.telemetry.mozilla.org
+INFO:root:Send request CONNECT to incoming.telemetry.mozilla.org:443
+INFO:root:Get correctly response of incoming.telemetry.mozilla.org

@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+    {% block style %} {% endblock %}
+</head>
+<body>
+
+<section class="header">{% block header %} {% endblock %}</section>
+
+<section class="main">{% block main %} {% endblock %}</section>
+
+<section class="footer">{% block footer %} {% endblock %}</section>
+
+{% block scripts %}  {% endblock %}
+
+
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js//popper.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</body>
+</html>
