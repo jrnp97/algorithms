@@ -1,0 +1,28 @@
+{% load i18n %}
+
+{% trans "Activa tu cuenta en" %} {{ site.name }}:
+
+https://{{ site.domain }}{% url 'user:registration_activate' activation_key %}
+
+{% blocktrans %}Enlace válido durante {{ expiration_days }} días.{% endblocktrans %}
+
+
+{% load i18n %}
+
+{% blocktrans with site_name=site.name %}
+    Tu (o alguien pretendiendo ser tu) ha registrado una cuenta en
+    {{ site_name }}.  Si no fuiste tu simplemente ignora este mensaje
+    nosotros te borraremos de nuestro sistema.
+{% endblocktrans %}
+
+{% blocktrans %}
+    Para activar tu cuenta, por favor presione el siguiente enlace el cual expira en
+    {{ expiration_days }} dias:
+{% endblocktrans %}
+
+https://{{site.domain}}{% url 'user:registration_activate' activation_key %}
+
+{% blocktrans with site_name=site.name %}
+    Cordialmente,
+    Administrador {{ site_name }}
+{% endblocktrans %}

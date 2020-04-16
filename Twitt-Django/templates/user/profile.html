@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block meta %} {% endblock %}
+
+{% block title %} MT - Perfil {% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block navbar %}
+    {% include 'navindex.html' %}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div class="col-md-12">
+                <h3>
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <i class="fa fa-terminal fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <b>{{ request.user }}</b>
+                </h3>
+            </div>
+            <div class="col-md-12">
+                <form class="form-horizontal" method="post">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <button class="btn btn-danger boton-twitt" type="submit">Enviar twitt <i class="fa fa-paper-plane fa-1x" aria-hidden="true"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+             <div class="row">
+                 <h1 class="text-center" style="color: brown;">Mis Twiit's</h1>
+             </div>
+
+            {% for a in twitts %}
+            <div class="row">
+                <div class="col-xs-0"></div>
+                <div class="col-xs-12 col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#">
+                                    <img class="imgprofile media-object" src="https://image.freepik.com/iconos-gratis/usuario-masculino-foto-de-perfil_318-37825.jpg" alt="chum_perfil" style="width: 64px; height:64px;">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading"><a href="#">{{ a.user_twit }}</a></h4>
+                                    <p>{{ a.text }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer text-right">{{ a.date_twit }}</div>
+                    </div>
+                </div>
+                <div class="col-xs-0"></div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer.html' %}
+{% endblock %}

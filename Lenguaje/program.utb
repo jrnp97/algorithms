@@ -1,0 +1,10 @@
+nota: Ejemplo de condicionales
+nombre_del_ejercicio $condicionales
+variables
+   
+    tipo matriz de entero nombre $matriz de tamano 3x4
+
+fin_variables
+flujo
+    mostrar_en_pantalla "hola mundo"
+fin_flujo

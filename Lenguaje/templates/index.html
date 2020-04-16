@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+<title>Lenguaje UTB</title>    
+<link rel="stylesheet" href="{{ url_for('static', filename='css/materialize.min.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+<link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great|Press+Start+2P" rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+     <nav>
+    <div class="nav-wrapper nav">
+      <a href="#" class="brand-logo center">Lenguaje UTB</a>
+    </div>
+  </nav>
+</header>
+    
+<main class="formu">
+    <!--Code-->
+      
+    <div class="row">
+    <form class="col s12" method="post">
+        
+      <div class="row">
+        <div class="input-field col s12 m6">
+          <textarea id="textarea1" class="Code" name="code" autofocus></textarea>
+        </div>
+        <div class="input-field col s12 m6">
+              <textarea id="textarea2" type="text/plain" class="result" name="result" >
+                  {% for i in RESULT %}
+                  {{ i }}
+                  {% endfor %}
+              </textarea>
+        </div>
+          <div class="col s12 m12">
+              <input class="waves-effect waves-light btn-large boton" type="submit" value="Compilar">
+          </div>
+      </div>
+        
+    </form>
+  </div>
+    
+</main>
+    
+<footer class="page-footer nav">
+    
+</footer>
+<!--a class="waves-effect waves-light btn">button</a-->
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/materialize.min.js')}}"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+nota: Impresion de una linea de texto
+nombre_del_ejercicio $mi_primer_programa
+flujo
+mostrar_en_pantalla "Hola mundo"
+fin_flujo
+
+
+C:\Users\asus\Documents\Proyecto-Java_Antlr\antlrworks-1.5.2-complete.jar
+
+Compilacion-----EXITOSA
+
+javac -cp C:\Users\asus\Documents\Proyecto-Java_Antlr\antlrworks-1.5.2-complete.jar Java_Compiler.java PruebaLexer.java PruebaParser.java LenguajepruebaAST.java
+
+
+EJECUCION-----DUDOSA
+
+java -cp C:\Users\asus\Documents\Proyecto-Java_Antlr\antlrworks-1.5.2-complete.jar Java_Compiler.class PruebaLexer.class PruebaParser.class LenguajepruebaAST.class
+
+
+java -cp C:\Users\asus\Documents\Proyecto-Java_Antlr\Java_Compiler
+
+INFORMACION
+
+http://foro.elhacker.net/java/ayuda_con_el_classpath_porfavor-t356141.0.html
+
+http://foro.elhacker.net/java/java_error_al_ejecutar_aplicaciones_no_se_ha_encontrado_o_cargado_la_clase-t389046.0.html
+
+http://foro.elhacker.net/java/ayuda_error_al_ejecutar_un_java-t356083.0.html
+
+http://www.thejavageek.com/2013/07/21/using-javac-and-java-commands-to-compile-and-launch-java-programs/
+
+http://www.forosdelweb.com/f45/no-ha-encontrado-cargado-clase-principal-1121051/
+
+https://es.stackoverflow.com/questions/3547/por-qu%C3%A9-no-puedo-ejecutar-una-clase-java-creada-y-compilada-desde-netbeans-por
+
+https://www.google.com.co/search?q=java+Java_Compiler.java+Error%3A+no+se+ha+encontrado+o+cargado+la+clase+principal&rlz=1C1CHZL_esCO743CO743&oq=java+Java_Compiler.java+Error%3A+no+se+ha+encontrado+o+cargado+la+clase+principal+&aqs=chrome..69i57.4531j0j1&sourceid=chrome&ie=UTF-8
+
+http://www.codejava.net/java-core/tools/using-javac-command
+
+http://introcs.cs.princeton.edu/java/15inout/windows-cmd.html
+
+
+
+EJECUTAR COMANDO EN LA TERMINAL 
+
+
+import subprocess
+
+cmd = ["comando"]
+
+p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+
+out, err = p.comunicate()
+

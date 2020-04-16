@@ -1,0 +1,46 @@
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    
+  }
+
+.nav
+{
+    font-family: 'Fredericka the Great', cursive;
+    background:  rgba(98,125,77,1);
+}
+
+
+.formu
+{
+    background: url("../img/fondo3.png");
+}
+
+.Code 
+{
+    font-family: 'Press Start 2P', cursive;
+    font-size: 6pt;
+    resize: none;
+    max-height: 500px;
+    height: 500px;
+    background: white;
+    opacity: 0.5
+}
+
+.result
+{
+    resize: none;
+    max-height: 500px;
+    height: 500px;
+    background: white;
+}
+
+.boton
+{
+    background: rgba(98,125,77,0.5);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 6pt;
+    height: 50px;
+    margin-left:39%;
+}

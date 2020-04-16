@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block meta %}{% endblock %}
+
+{% block title %} Activacion completa {% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block navbar %}{% endblock %}
+
+{% block content %}
+{% load static %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <h1 class="text-left" style="float: right"><strong>Cambio de contraseña</strong></h1>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <a href="{% url 'user:index' %}"><img src="{% static 'img/logo_small.png' %}" class="img-responsive" style="float: right;"></a>
+            </div>
+        </div>
+        <hr>
+        <p class="text-center">{% trans "Tu contraseña no ha sido activada." %}</p>
+        <div class="text-center">
+            <a href="{% url 'user:index' %}"><button class="btn btn-warning">Regresar a Inicio</button></a>
+        </div>
+        <hr>
+    </div>
+{% endblock %}
+
+
+{% block footer %}
+    {% include 'footer.html' %}
+{% endblock %}

@@ -1,0 +1,50 @@
+    <nav class="navbar navbar-default">
+		<div class="container-fluid">
+    		<div class="navbar-header">
+      			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        			<span class="sr-only">Toggle navigation</span>
+        			<span class="icon-bar"></span>
+        			<span class="icon-bar"></span>
+        			<span class="icon-bar"></span>
+      			</button>
+      			<a class="logo navbar-brand" href="{% url 'user:index' %}" style="font-family: 'Frijole'; font-size: 15pt;">&lt &gt M-Twiit &lt / &gt</a>
+    		</div>
+    		<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">
+
+                {% if not request.user.is_authenticated %}
+	      		<ul class="nav navbar-nav navbar-right">
+					<!-- verificando URL, siempre y cuando no este en la url de registro procedo a mostrar la opcion
+					en el navbar -->
+					{% if not "/register" in request.get_full_path %}
+	        		<li><a href="{% url 'user:registration_register' %}">Registrarse</a></li>
+					{% endif %}
+					<!-- verificando URL, siempre y cuando no este en la url de login procedo a mostrar la opcion
+					en el navbar -->
+					{% if not "/login" in request.get_full_path %}
+	        		<li><a href="{% url 'auth_login' %}">Iniciar sesion</a></li>
+					{% endif %}
+	      		</ul>
+                {% else %}
+				<!-- Habilitando opciones para usuario autenticado -->
+				<ul class="nav navbar-nav navbar-right">
+                    {% if "/" in request.get_full_path and not "/profile" in request.get_full_path%}
+                        <li><a href="{% url 'user:profile' %}">Perfil</a></li>
+                    {% else %}
+                        <li><a href="{% url 'user:index' %}">Inicio</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Opciones <i class="fa fa-bars" aria-hidden="true"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Modificar perfil</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{% url 'auth_password_change' %}">Cambiar contraseña</a></li>
+                                <li><a href="#">Eliminar cuenta</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{% url 'auth_logout' %}">Salir</a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
+                </ul>
+                {% endif %}
+    		</div>
+  		</div>
+	</nav>

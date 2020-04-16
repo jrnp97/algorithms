@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load i18n %}
+<html lang="en">
+
+<head>
+    <title>{{ site.name }} {% trans "registro" %}</title>
+</head>
+
+<body>
+<p>
+    {% blocktrans with site_name=site.name %}
+    Tu (o alguien pretendiendo ser tu) ha registrado una cuenta en
+    {{ site_name }}.  Si no fuiste tu simplemente ignora este mensaje
+    nosotros te borraremos de nuestro sistema.
+    {% endblocktrans %}
+</p>
+<p>
+    {% blocktrans %}
+    Para activar tu cuenta, por favor presione el siguiente enlace el cual expira en
+    {{ expiration_days }} dias:
+    {% endblocktrans %}
+</p>
+
+<p>
+    <a href="https://{{site.domain}}{% url 'user:registration_activate' activation_key %}">
+        {{site.domain}}{% url 'user:registration_activate' activation_key %}
+    </a>
+</p>
+<p>
+    {% blocktrans with site_name=site.name %}
+    Cordialmente,
+    Administrador {{ site_name }}
+    {% endblocktrans %}
+</p>
+</body>
+
+</html>

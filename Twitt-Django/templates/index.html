@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %} MT - Inicio {% endblock %}
+
+
+{% block css %} {% endblock %}
+
+{% block navbar %}
+        {% include 'navindex.html' %}
+{% endblock %}
+
+
+{% block content %}
+
+{% load static %}
+
+{% if request.user.is_authenticated %}
+<div class="container">
+	<div class="text-center">
+		<h1>Tweets de todo el mundo que sigue</h1>
+		<p>Aqui se podra apreciar los twiits de las personas que sigue</p>
+	</div>
+</div>
+{% else %}
+<div class="container">
+	<div class="text-center">
+		<h1>Mini Twiit</h1>
+		<p>Una pequeña imitacion de twitter realizada en django, para probar las capacidades y entender el framework.</p>
+
+		<p><b>Mira lo que estan compartiendo</b> <i class="fa fa-hand-o-down" aria-hidden="true"></i></p>
+		<hr>
+	</div>
+    {% for a in object_list %}
+    <div class="row">
+		<div class="col-xs-0 col-md-3"></div>
+		<div class="col-xs-12 col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="media">
+						<div class="media-left">
+							<a href="#">
+							<img class="imgprofile media-object" src="https://image.freepik.com/iconos-gratis/usuario-masculino-foto-de-perfil_318-37825.jpg" alt="chum_perfil" style="width: 64px; height:64px;">
+							</a>
+						</div>
+						<div class="media-body">
+							<h4 class="media-heading"><a href="#">{{ a.user_twit }}</a></h4>
+							<p>{{ a.text }}</p>
+						</div>
+					</div>
+				</div>
+				<div class="panel-footer text-right">{{ a.date_twit }}</div>
+			</div>
+		</div>
+		<div class="col-xs-0 col-md-3"></div>
+	</div>
+    {% endfor %}
+
+    <div class="row">
+		<ul class="pager">
+            <li>
+                <!-- Verificando si existe una pagina previa -->
+                {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Anterior</a>
+                {% endif %}
+            </li>
+            <li>
+                <!-- Verificando si existe una siguiente pagina -->
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Siguiente <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                {% endif %}
+            </li>
+		</ul>
+	</div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer.html' %}
+{% endblock %}
